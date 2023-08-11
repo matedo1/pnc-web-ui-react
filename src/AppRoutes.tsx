@@ -24,6 +24,10 @@ import { DashboardPage } from 'components/DashboardPage/DashboardPage';
 import { DemoPage } from 'components/DemoPage/DemoPage';
 import { ErrorPage } from 'components/ErrorPage/ErrorPage';
 import { GroupBuildsPage } from 'components/GroupBuildsPage/GroupBuildsPage';
+import { GroupConfigBuildConfigsPage } from 'components/GroupConfigBuildConfigsPage/GroupConfigBuildConfigsPage';
+import { GroupConfigBuildHistoryPage } from 'components/GroupConfigBuildHistoryPage/GroupConfigBuildHistoryPage';
+import { GroupConfigDetailPage } from 'components/GroupConfigDetailPage/GroupConfigDetailPage';
+import { GroupConfigPages } from 'components/GroupConfigPages/GroupConfigPages';
 import { GroupConfigsPage } from 'components/GroupConfigsPage/GroupConfigsPage';
 import { ProductDetailPage } from 'components/ProductDetailPage/ProductDetailPage';
 import { ProductMilestoneBuildsPerformedPage } from 'components/ProductMilestoneBuildsPerformedPage/ProductMilestoneBuildsPerformedPage';
@@ -102,7 +106,15 @@ export const AppRoutes = () => (
       <Route path=":projectId" element={<ProjectDetailPage />} />
     </Route>
     <Route path="build-configs" element={<BuildConfigsPage />} />
-    <Route path="group-configs" element={<GroupConfigsPage />} />
+    <Route path="group-configs">
+      <Route index element={<GroupConfigsPage />} />
+      <Route path=":groupConfigId" element={<GroupConfigPages />}>
+        <Route path="details" element={<GroupConfigDetailPage />} />
+        <Route path="buildConfigs" element={<GroupConfigBuildConfigsPage />} />
+        <Route path="buildHistory" element={<GroupConfigBuildHistoryPage />} />
+        <Route index element={<Navigate to="details" replace />} />
+      </Route>
+    </Route>
     <Route path="builds">
       <Route index element={<BuildsPage />} />
       <Route path=":buildId" element={<BuildPages />}>

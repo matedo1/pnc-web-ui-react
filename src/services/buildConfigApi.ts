@@ -32,3 +32,24 @@ export const build = ({ buildStartParams }: { buildStartParams: IBuildStartParam
   requestConfig.params = requestConfig.params ? Object.assign(requestConfig.params, buildStartParams) : buildStartParams;
   return pncClient.getHttpClient().post<Build>(`/build-configs/${buildStartParams.id}/build`, null, requestConfig);
 };
+
+// interface IGetByGroupConfigData {
+//   groupConfigId?: number;
+// }
+
+/**
+ * Get all Build Configs of a Group Config with the latest Build.
+ *
+ * @param groupConfigId - The id of the Group Config
+ *
+ * @param requestConfig - Axios based request config
+ */
+export const getByGroupConfigIdWithLatestBuild = (
+  // { groupConfigId }: { groupConfigId: IGetByGroupConfigData },
+  requestConfig: AxiosRequestConfig = {}
+) => {
+  requestConfig.params = requestConfig.params
+    ? Object.assign(requestConfig.params, { q: `groupConfigurations.id==100` })
+    : { q: `groupConfigurations.id==100` };
+  return pncClient.getHttpClient().get<BuildConfigPage>('/build-configs/x-with-latest-build', requestConfig);
+};
