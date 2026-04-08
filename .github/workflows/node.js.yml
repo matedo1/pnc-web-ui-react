@@ -30,7 +30,10 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: node --version && npm --version
-      - run: npm install -g npm@^11.0.0
+      - run: |
+          # workaround https://github.com/npm/cli/issues/9151
+          npm install -g npm@11.11.1
+          npm install -g npm@^11.0.0
       - run: npm --version
       - run: npm ci
       - run: npm run build
