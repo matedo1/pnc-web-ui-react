@@ -104,9 +104,6 @@ export const AppLayout = () => {
         <DropdownLinkItem key="preferences" to="/preferences">
           Preferences
         </DropdownLinkItem>
-        <DropdownLinkItem key="demo" to="/admin/demo">
-          Demo
-        </DropdownLinkItem>
         <DropdownLinkItem key="variables" to="/admin/variables">
           Variables
         </DropdownLinkItem>
